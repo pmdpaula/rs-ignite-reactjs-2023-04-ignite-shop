@@ -4,14 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Stripe from 'stripe';
 
-import { ProductDTO } from '@/dtos/ProductDTO';
+import { ProductStripeDTO } from '@/dtos/ProductStripeDTO';
 import { stripe } from '@/lib/stripe';
 import { HomeContainer, Product } from '@/styles/pages/home';
 
 import 'keen-slider/keen-slider.min.css';
 
 interface HomeProps {
-  products: ProductDTO[];
+  products: ProductStripeDTO[];
 }
 
 const Home = ({ products }: HomeProps) => {

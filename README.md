@@ -88,14 +88,14 @@ settings: {
 
 ```javascript
 module.exports = {
-  trailingComma: "all",
+  trailingComma: 'all',
   useTabs: false,
   tabWidth: 2,
   semi: true,
   singleQuote: true,
   printWidth: 90,
-  arrowParens: "always",
-  endOfLine: "lf",
+  arrowParens: 'always',
+  endOfLine: 'lf',
   editorconfig: true,
   singleAttributePerLine: true,
   // "importOrder": [
@@ -133,4 +133,10 @@ npm install keen-slider
 
 ```bash
 npm i stripe
+```
+
+[Axios](https://axios-http.com/docs/intro)
+
+```bash
+npm i axios
 ```

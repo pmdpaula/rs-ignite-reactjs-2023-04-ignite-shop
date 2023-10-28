@@ -1,21 +1,44 @@
+import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Stripe from 'stripe';
 
-import { ProductDTO } from '@/dtos/ProductDTO';
+import { ProductStripeDTO } from '@/dtos/ProductStripeDTO';
 import { stripe } from '@/lib/stripe';
 import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
 
 interface ProductProps {
-  product: ProductDTO;
+  product: ProductStripeDTO;
 }
 
 const Product = ({ product }: ProductProps) => {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+
   const { isFallback } = useRouter();
 
   if (isFallback) {
     return <p>Carregando...</p>;
+  }
+
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true);
+
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      });
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      // TODO: conectar com alguma ferramenta de observabilidade (Datadog, Sentry, etc)
+      setIsCreatingCheckoutSession(false);
+
+      alert('Erro ao realizar a compra, tente novamente.');
+    }
   }
 
   return (
@@ -36,7 +59,13 @@ const Product = ({ product }: ProductProps) => {
 
         <p>{product.description}</p>
 
-        <button type="button">Adicionar ao carrinho</button>
+        <button
+          type="button"
+          onClick={handleBuyProduct}
+          disabled={isCreatingCheckoutSession}
+        >
+          Comprar agora
+        </button>
       </ProductDetails>
     </ProductContainer>
   );
@@ -65,6 +94,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
           currency: price.currency,
         }).format(Number(price.unit_amount) / 100),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 2, // 2 hours
