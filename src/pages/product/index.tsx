@@ -1,8 +1,7 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-export const Product = () => {
+const Product = () => {
   const { query } = useRouter();
-  console.log("🚀 ~ file: index.tsx:5 ~ Product ~ query:", query);
 
   return (
     <>
@@ -12,3 +11,5 @@ export const Product = () => {
     </>
   );
 };
+
+export default Product;

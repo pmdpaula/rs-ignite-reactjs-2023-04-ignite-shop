@@ -24,7 +24,7 @@ Responder as perguntas para criar o projeto.
 [Lint](https://medium.com/weekly-webtips/how-to-sort-imports-like-a-pro-in-typescript-4ee8afd7258a)
 
 ```bash
-npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-import-resolver-typescript
+npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-import-resolver-typescript eslint-plugin-react
 ```
 
 #### Arquivo `.eslintrc.js`
@@ -127,4 +127,10 @@ npm install @stitches/react
 
 ```bash
 npm install keen-slider
+```
+
+[Sistema de pagamentos - Stripe](https://stripe.com/docs/api?lang=node)
+
+```bash
+npm i stripe
 ```
