@@ -28,7 +28,11 @@ const Home = ({ products }: HomeProps) => {
       className="keen-slider"
     >
       {products.map((product) => (
-    <HomeContainer ref={sliderRef} className="keen-slider">
+        <Link
+          key={product.id}
+          href={`/product/${product.id}`}
+          prefetch={false}
+        >
           <Product className="keen-slider__slide">
             <Image
               src={product.imageUrl}
@@ -42,24 +46,7 @@ const Home = ({ products }: HomeProps) => {
               <span>{product.price}</span>
             </footer>
           </Product>
-
-      <Product className="keen-slider__slide">
-        <Image src={camiseta2} width={520} height={480} alt="" />
-
-        <footer>
-          <strong>Camiseta 2</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </Product>
-
-      <Product className="keen-slider__slide">
-        <Image src={camiseta3} width={520} height={480} alt="" />
-
-        <footer>
-          <strong>Camiseta 3</strong>
-          <span>R$ 84,90</span>
-        </footer>
-      </Product>
+        </Link>
       ))}
     </HomeContainer>
   );
